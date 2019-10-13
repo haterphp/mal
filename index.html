@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script defer src="assets/js/main.js"></script>
+    <script defer src="assets/js/jquery-3.4.1.js"></script>
+    <title>Game</title>
+</head>
+<body>
+    <main>
+        <div id="pause">
+            <div>
+                <h1>Pause</h1>
+                <p>Press ESCAPE to disabled pause</p>
+            </div>
+        </div>
+        <div id="game">
+            <div class="info">
+                <div>
+                    <span>Name: <span id="name">user</span></span>
+                    <span>Selected Hero: <span id="heroName">mario</span></span>
+                </div>
+                <div>
+                    <span><img class="imgMenu" src="assets/img/heart.gif" alt="heart"> X <span class="textImages" id="hp">10</span></span>
+                    <span><img class="imgMenu" src="assets/img/animate/mushroom.gif" alt="mushroom"> X <span class="textImages" id="mushrooms">0</span></span>
+                </div>
+                <div>
+                    <span><img class="imgMenu" src="assets/img/timer.gif" alt="heart"> : <span class="textImages" id="timer">00 : 00</span></span>
+                </div>
+                <button id="restart" style="display: none" onclick="restart()">Restart</button>
+            </div>
+            <div class="elements">
+            </div>
+        </div>
+        <audio src="assets/sounds/main.mp3" id="audio"></audio>
+    </main>
+</body>
+</html>

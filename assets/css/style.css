@@ -91,3 +91,6 @@
     background: url("../img/animate/turtle.gif") center no-repeat;
     background-size: 100% 100%;
 }
+.platform{
+    background-color: #1b1b08;
+}

@@ -76,6 +76,28 @@ class Drawable {
     }
 }
 
+class Platform extends Drawable{
+    constructor(game){
+        super(game);
+        this.h = 50;
+        this.w = 150;
+        this.x = random(350, this.game.$zone.width() - this.w - 250);
+        this.y = this.game.$zone.height() - this.h - (this.game.$zone.height() / 100 * 35);
+
+        this.createElement();
+    }
+
+    update() {
+        if(this.game.player.isCollisionPlatform(this)){
+            this.game.player.actions.set('PlatformUp',this);
+        }
+        if(this.game.player.isCollisionBottomPlatform(this)){
+            this.game.player.actions.set('PlatformDown',this);
+        }
+        super.update();
+    }
+}
+
 class Player extends Drawable {
 
     constructor(game) {
@@ -87,12 +109,12 @@ class Player extends Drawable {
         this.y = this.game.$zone.height() - (this.h + (this.game.$zone.height() / 100 * 15));
 
         this.speed = 7;
-        this.speedVertical = 13;
+        this.speedVertical = 14;
         this.jumpCount = 0;
         this.gravity = 0.35;
 
         this.hp = 10;
-        this.type = "luigi";
+        this.type = "mario";
 
         this.keys = new Map()
             .set("ArrowRight", null)
@@ -100,7 +122,7 @@ class Player extends Drawable {
             .set("ArrowUp", null);
 
         this.actions = new Map()
-            .set("Platform", null);
+            .set("PlatformUp", null);
 
         this.createElement();
         this.keyEvent();
@@ -122,6 +144,11 @@ class Player extends Drawable {
         this.keys.forEach((value, key) => {
             if (this[`go${key}`]) {
                 this[`go${key}`](value);
+            }
+        });
+        this.actions.forEach((value, key) => {
+            if (this[`action${key}`]) {
+                this[`action${key}`](value);
             }
         });
         super.update();
@@ -195,11 +222,62 @@ class Player extends Drawable {
         }
     }
 
+    actionPlatformUp(platform){
+        if(platform){
+
+            this.changeAnimation(`${this.type}/idle-${this.type}`);
+            if(this.keys.get("ArrowUp") === "keydown"){
+                this.actions.set("PlatformUp",null);
+                return;
+            }
+            if(this.keys.get("ArrowRight") === "keydown") {
+                this.changeVec(1);
+                this.changeAnimation(`${this.type}/run-${this.type}`);
+            }
+            if(this.keys.get("ArrowLeft") === "keydown"){
+                this.changeVec(-1);
+                this.changeAnimation(`${this.type}/run-${this.type}`);
+            }
+            if(this.isCollisionPlatform(platform)){
+                this.jumpStop();
+                return;
+            }
+            if(this.isCollisionBottom()){
+                this.jumpStop();
+                this.actions.set("PlatformUp",null);
+                return;
+            }
+            this.offsets.y = this.speed
+        }
+    }
+
+    actionPlatformDown(platform){
+
+        if(platform){
+            if(this.isCollisionBottomPlatform(platform)){
+                this.jumpStop();
+            }
+            if(this.isCollisionBottom()){
+                this.jumpStop();
+                this.actions.set("PlatformDown",null);
+                return;
+            }
+            this.offsets.y = this.speed;
+        }
+
+    }
+
     jumpStop() {
         this.offsets.y = 0;
         this.jumpCount = 0;
     }
 
+    isCollisionPlatform(platform){
+        return this.isCollision(platform) && this.y + this.h - this.speedVertical <= platform.y;
+    }
+    isCollisionBottomPlatform(platform){
+        return this.isCollision(platform) && this.y - this.speedVertical <= platform.y + platform.h && this.offsets.y < 0;
+    }
     isCollisionBottom() {
         return this.y > this.game.$zone.height() - ((this.game.$zone.height() / 100 * 15) + this.h + this.speed) && this.offsets.y > 0;
     }
@@ -345,6 +423,7 @@ class Game {
     start() {
         this.generateMany(Goombas,3, 100);
         this.generateMany(Turtle, 3, 100);
+        this.generateMany(Platform, 5, 100);
         this.loop();
     }
 

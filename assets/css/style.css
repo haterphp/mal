@@ -1,0 +1,167 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: "MAL";
+}
+
+@font-face {
+    font-family: "MAL";
+    src: url("../fonts/MarioAndLuigi.ttf");
+}
+
+main {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.left {
+    width: 40%;
+    height: 100%;
+}
+
+.right {
+    width: 60%;
+    height: 100%;
+}
+
+#restart {
+    color: white;
+}
+
+#startButton {
+    color: white;
+}
+
+.main-end-panel {
+    padding: 5vh;
+    background-color: #fff;
+}
+
+.main-start-panel {
+    padding: 5vh;
+    background-color: #fff;
+}
+
+#instruction {
+    width: 70%;
+    height: 30%;
+}
+
+#heroImg {
+    display: none;
+}
+
+.changeHero {
+    width: 90%;
+    height: 30%;
+}
+
+table {
+    width: 80%;
+    text-align: center;
+}
+
+#nameInput {
+    border-radius: 5px 0 0 5px;
+}
+
+#startButton {
+    border-radius: 0 5px 5px 0;
+}
+
+.itemHero {
+    opacity: 0.3;
+    cursor: pointer;
+    transition: .5s;
+}
+
+#start {
+    background: url("../img/start-bg.png") center no-repeat;
+    background-size: 100% 100%;
+}
+
+#end {
+    background: url("../img/start-bg.png") center no-repeat;
+    background-size: 100% 100%;
+}
+
+#game {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+#mario {
+    background: url("../img/animation/mario/idle.gif") center no-repeat;
+    background-size: 100% 100%;
+}
+
+#luigi {
+    background: url("../img/animation/luigi/idle.gif") center no-repeat;
+    background-size: 100% 100%;
+}
+
+.info {
+    color: white;
+    height: 5vh;
+    top: 5vh;
+    position: fixed;
+}
+
+.disabled:hover {
+
+}
+#pause{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.73);
+    color: white;
+    display: none;
+    flex-direction: column;
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+.elements {
+    width: 300%;
+    height: 100%;
+    position: absolute;
+    background: url("../img/game-bg.gif") left repeat-x;
+    z-index:-100;
+    background-size: 30% 100%;
+}
+.element{
+    position: absolute;
+    z-index: -100;
+}
+.turtle{
+    background: url("../img/animation/turtle.gif") center no-repeat;
+    background-size: 100% 100%;
+}
+.owl{
+    background: url("../img/animation/owl.gif") center no-repeat;
+    background-size: 100% 100%;
+}
+.mushroom{
+    background: url("../img/animation/mushroom.gif") center no-repeat;
+    background-size: 100% 100%;
+}
+.platform{
+    display: flex;
+    justify-content: center;
+}
+.defaultblock{
+    background: url("../img/animation/defualt.gif") center no-repeat;
+    background-size: 100% 100%;
+}
+.specialblock{
+    background: url("../img/animation/special.gif") center no-repeat;
+    background-size: 100% 100%;
+}
+.disabledblock{
+    background: url("../img/animation/disabled.gif") center no-repeat;
+    background-size: 100% 100%;
+}

@@ -455,7 +455,6 @@ class Game {
     }
 
     end() {
-        this.pause = true;
         end();
     }
 
